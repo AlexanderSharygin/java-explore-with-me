@@ -12,7 +12,7 @@ public class HitMapper {
                 hit.getApp().getName(),
                 hit.getUri(),
                 hit.getIp(),
-                hit.getDate_time()
+                hit.getDateTime()
         );
     }
 

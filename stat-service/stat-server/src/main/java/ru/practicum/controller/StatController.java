@@ -20,7 +20,7 @@ import static org.springframework.http.HttpStatus.OK;
 @Slf4j
 public class StatController {
     private final StatService statService;
-    private final static String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+    private final String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 
     @Autowired
     public StatController(StatService statService) {
