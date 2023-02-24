@@ -11,8 +11,8 @@ services:
       - SHAREIT_SERVER_URL=http://server:9090
 
   stat-service:
-    build: ./stat-service/server
-    container_name: stats-service
+    build: ./stat-service/stat-server
+    container_name: stat-service
     ports:
       - "9090:9090"
     depends_on:
