@@ -31,6 +31,6 @@ public class Hit {
     @Size(min = 1, max = 64)
     private String ip;
 
-    @Column(name ="DATE_TIME")
+    @Column(name = "DATE_TIME")
     private LocalDateTime dateTime;
 }
