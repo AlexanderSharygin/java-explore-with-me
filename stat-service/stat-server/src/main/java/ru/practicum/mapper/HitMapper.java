@@ -3,8 +3,9 @@ package ru.practicum.mapper;
 import lombok.NoArgsConstructor;
 import ru.practicum.hit.HitDto;
 import ru.practicum.model.Hit;
+
 @NoArgsConstructor
-public class Mapper {
+public class HitMapper {
     public static HitDto toHitDto(Hit hit) {
         return new HitDto(
                 hit.getId(),
@@ -24,5 +25,4 @@ public class Mapper {
                 hitDto.getTimestamp()
         );
     }
-
 }

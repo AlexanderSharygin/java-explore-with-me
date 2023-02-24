@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.practicum.hit.HitDto;
-import ru.practicum.mapper.Mapper;
+import ru.practicum.mapper.HitMapper;
 import ru.practicum.model.App;
 import ru.practicum.model.Hit;
 import ru.practicum.repository.AppRepository;
@@ -18,7 +18,6 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class StatService {
-
 
     private final HitRepository hitRepository;
     private final AppRepository appRepository;
@@ -37,14 +36,15 @@ public class StatService {
             App app = new App();
             app.setName(hitDto.getApp());
             newApp = appRepository.save(app);
+            log.info("В таблицу APP добавлен новый элемент с именем {}", app.getName());
         } else {
             newApp = existedApp.get();
         }
-        Hit hit = Mapper.toHit(hitDto);
+        Hit hit = HitMapper.toHit(hitDto);
         hit.setApp(newApp);
+        log.info("В таблицу HIT добавлен новый элемент - обращение к {} с IP {}", hit.getUri(), hit.getIp());
 
-        return Mapper.toHitDto(hitRepository.save(hit));
-
+        return HitMapper.toHitDto(hitRepository.save(hit));
     }
 
     public List<Stats> getStats(LocalDateTime startRange, LocalDateTime endRange, List<String> uris, boolean unique) {
@@ -62,6 +62,7 @@ public class StatService {
                 stats = hitRepository.findUniqueHitsByUris(startRange, endRange, uris);
             }
         }
+
         return stats;
     }
 }

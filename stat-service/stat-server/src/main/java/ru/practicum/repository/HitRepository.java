@@ -12,23 +12,31 @@ import java.util.List;
 @Repository
 public interface HitRepository extends JpaRepository<Hit, Long> {
 
-    @Query("select a.name, h.uri, count (h) from Hit h join App a on a.id=h.app.id " +
-            "where h.date_time between :startDateTime and :endDateTime " +
-            "group by  h.uri,a.name order by count(h) desc")
+    @Query("SELECT new ru.practicum.stats.Stats(a.name, h.uri, COUNT (h.id)) " +
+            "FROM Hit h JOIN App a ON a.id=h.app.id " +
+            "WHERE h.date_time BETWEEN :startDateTime AND :endDateTime " +
+            "GROUP BY  h.uri, a.name " +
+            "ORDER BY COUNT(h.id) DESC")
     List<Stats> findAllHits(LocalDateTime startDateTime, LocalDateTime endDateTime);
 
-    @Query("select a.name, h.uri, count (h.ip) from Hit h join App a on a.id=h.app.id " +
-            "where h.date_time between :startDateTime and :endDateTime " +
-            "group by h.uri,a.name order by count(h.ip) desc")
+    @Query("SELECT new ru.practicum.stats.Stats(a.name, h.uri, count (h.id))" +
+            "FROM Hit h JOIN App a ON a.id=h.app.id " +
+            "WHERE h.date_time BETWEEN :startDateTime AND :endDateTime " +
+            "GROUP BY h.uri, h.ip " +
+            "ORDER BY COUNT(h.id) DESC")
     List<Stats> findAllUniqueHits(LocalDateTime startDateTime, LocalDateTime endDateTime);
 
-    @Query("select a.name, h.uri, count (h) from Hit h join App a on a.id=h.app.id " +
-            "where (h.date_time between :startDateTime and :endDateTime) and (h.uri in :uris)" +
-            "group by h.uri,a.name order by count(h) desc")
+    @Query("SELECT new ru.practicum.stats.Stats(a.name, h.uri, count (h.id))" +
+            "FROM Hit h JOIN App a ON a.id=h.app.id " +
+            "WHERE (h.date_time BETWEEN :startDateTime AND :endDateTime) AND (h.uri IN (:uris))" +
+            "GROUP BY h.uri,a.name " +
+            "ORDER BY COUNT(h.id) DESC")
     List<Stats> findHitsByUris(LocalDateTime startDateTime, LocalDateTime endDateTime, List<String> uris);
 
-    @Query("select a.name, h.uri, count (h.ip) from Hit h join App a on a.id=h.app.id " +
-            "where (h.date_time between :startDateTime and :endDateTime) and (h.uri in :uris)" +
-            "group by h.uri,a.name order by count(h.ip) desc")
+    @Query("SELECT new ru.practicum.stats.Stats(a.name, h.uri, count (h.id))" +
+            "FROM Hit h JOIN App a ON a.id=h.app.id " +
+            "WHERE h.date_time BETWEEN :startDateTime AND :endDateTime AND (h.uri IN (:uris))" +
+            "GROUP BY h.uri, h.ip " +
+            "ORDER BY COUNT (h.id) desc")
     List<Stats> findUniqueHitsByUris(LocalDateTime startDateTime, LocalDateTime endDateTime, List<String> uris);
 }

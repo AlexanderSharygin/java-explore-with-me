@@ -1,6 +1,9 @@
 package ru.practicum.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -20,5 +23,4 @@ public class App {
     @Size(min = 1, max = 200)
     @Column(name = "name")
     private String name;
-
 }
