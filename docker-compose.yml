@@ -8,7 +8,7 @@ services:
     depends_on:
       - stat-service
     environment:
-      - STATS_SERVER_URL=http://stat-server:9090
+      - STAT_SERVER_URL=http://stat-server:9090
 
   stat-service:
     build: ./stat-service/stat-server
