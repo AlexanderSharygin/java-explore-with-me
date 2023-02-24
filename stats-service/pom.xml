@@ -9,11 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>stat-service</artifactId>
+    <artifactId>stats-service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>stat-client</module>
-        <module>stat-dto</module>
+        <module>stats-client</module>
+        <module>stats-dto</module>
         <module>stats-server</module>
     </modules>
 
