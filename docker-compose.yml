@@ -27,7 +27,7 @@ services:
   stats-db:
     image: postgres:13.7-alpine
     ports:
-      - "6541:5432"
+      - "6540:5432"
     environment:
       - POSTGRES_DB=statistic
       - POSTGRES_USER=postgres
