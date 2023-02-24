@@ -14,12 +14,7 @@ spring:
       mode: always
 
   datasource:
-    url: jdbc:h2:file:./db/statistic
-    username: test
-    password: test
-    driverClassName: org.h2.Driver
-
-      #driverClassName: org.postgresql.Driver
-      #  url: jdbc:postgresql://localhost:5432/statistic
-    # username: postgres
-    # password: admin
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
