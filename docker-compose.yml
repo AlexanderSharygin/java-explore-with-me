@@ -8,10 +8,10 @@ services:
     depends_on:
       - stat-service
     environment:
-      - SHAREIT_SERVER_URL=http://server:9090
+      - STATS_SERVER_URL=http://stat-server:9090
 
   stat-service:
-    build: stat-service/stat-server
+    build: ./stat-service/stat-server
     container_name: stat-server
     ports:
       - "9090:9090"
